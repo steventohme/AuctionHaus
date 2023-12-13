@@ -50,4 +50,5 @@ model Auction {
   starting_price Float
   current_price Float
   grab_now_price Float?
+  
 }
