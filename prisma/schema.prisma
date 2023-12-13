@@ -27,7 +27,7 @@ model User {
   list_auction    Auction[]     @relation(name: "ListRelation")
   bid_auction     Auction[]     @relation(name: "BidRelation")
   won_auction     Auction[]     @relation(name: "WinnerRelation")
-  bid             Bid[]
+  bid            Bid[]
 }
 
 model UserAddress {
@@ -60,7 +60,7 @@ model Auction {
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt
   deleted_at     DateTime?
-  bids Bid[]
+  bids           Bid[]
 
   lister_id Int
   Lister    User @relation(name: "ListRelation", fields: [lister_id], references: [id])
