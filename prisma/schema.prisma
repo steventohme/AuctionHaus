@@ -17,6 +17,7 @@ model User {
   seller_reviews Int           @default(0)
   buyer_reviews  Int           @default(0)
   profile_picture String?
+  
   created_at     DateTime      @default(now())
   updated_at     DateTime      @updatedAt
 }
