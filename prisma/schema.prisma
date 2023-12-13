@@ -75,5 +75,6 @@ model Bid{
   id Int @id @unique @default(autoincrement())
   auction_id Int
   bidder_id Int
+  bid_amount Float
   
 }
