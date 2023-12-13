@@ -49,5 +49,6 @@ model User_payment {
   provider      String
   account_no    Int
   expry_date    DateTime
+  billing_address_id Int
   
 }
