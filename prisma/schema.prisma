@@ -11,5 +11,5 @@ model User {
   id             Int           @id @unique @default(autoincrement())
   username      String         @unique
   user_email     String        @unique
-  user_password  String // change this to proper authe
+  user_password  String // change this to proper authentification
 }
