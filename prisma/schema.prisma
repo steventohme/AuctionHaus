@@ -30,5 +30,5 @@ model UserAddress {
   id           Int           @id @unique @default(autoincrement())
   user_id      Int
   address_line1 String
-   User          User   @relation(fields: [user_id], references: [id])
+  User          User   @relation(fields: [user_id], references: [id])
 }
