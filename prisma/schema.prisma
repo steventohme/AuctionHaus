@@ -63,5 +63,5 @@ model Auction {
   Lister    User @relation(name: "ListRelation", fields: [lister_id], references: [id])
 
   bidder_id Int?
-  Buyer    User? @relation(name: "BidRelation", fields: [bidder_id], references: [id])
+  Bidder    User? @relation(name: "BidRelation", fields: [bidder_id], references: [id])
 }
