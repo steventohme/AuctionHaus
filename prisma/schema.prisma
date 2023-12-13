@@ -50,5 +50,5 @@ model Auction {
   starting_price Float
   current_price Float
   grab_now_price Float?
-  bid_increment Float? @default(0.0)
+  
 }
