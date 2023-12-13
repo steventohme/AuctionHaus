@@ -35,5 +35,6 @@ model UserAddress {
   state_or_province String
   postal_code  String
   country      String
+  
   User          User   @relation(fields: [user_id], references: [id])
 }
