@@ -41,11 +41,11 @@ model UserAddress {
   User              User      @relation(fields: [user_id], references: [id])
 }
 
-// may need tweaking once 
+// may need tweaking once stripe is implemented
 model User_payment {
   id            Int       @id @unique @default(autoincrement())
   user_id       Int
   payment_type  String
   provider      String
-
+  
 }
