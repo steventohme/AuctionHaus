@@ -52,5 +52,5 @@ model Auction {
   grab_now_price Float?
   auction_type String
   auction_status String @default("active")
-  
+  start_time DateTime @default(now())
 }
