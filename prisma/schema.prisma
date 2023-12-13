@@ -9,6 +9,6 @@ datasource db {
 
 model User {
   id             Int           @id @unique @default(autoincrement())
-  username      String        @unique
-  
+  username      String         @unique
+
 }
