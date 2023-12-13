@@ -27,7 +27,7 @@ model User {
   list_auction    Auction[]     @relation(name: "ListRelation")
   bid_auction     Auction[]     @relation(name: "BidRelation")
   won_auction     Auction[]     @relation(name: "WinnerRelation")
-  bid            Bid[]
+  bids            Bid[]
 }
 
 model UserAddress {
