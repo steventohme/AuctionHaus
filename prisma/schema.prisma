@@ -24,8 +24,8 @@ model User {
   updated_at      DateTime      @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
-  list_auction         Auction[] @relation(name: "SellerRelation")
-  bid_auction          Auction[] @relation(name: "BuyerRelation")
+  list_auction         Auction[] @relation(name: "ListRelation")
+  bid_auction          Auction[] @relation(name: "BidRelation")
 }
 
 model UserAddress {
@@ -59,9 +59,9 @@ model Auction {
   updated_at     DateTime  @updatedAt
   deleted_at     DateTime?
 
-  seller_id Int
-  Seller    User @relation(name: "SellerRelation", fields: [seller_id], references: [id])
+  lister_id Int
+  Lister    User @relation(name: "ListRelation", fields: [lister_id], references: [id])
 
   buyer_id Int?
-  Buyer    User? @relation(name: "BuyerRelation", fields: [buyer_id], references: [id])
+  Buyer    User? @relation(name: "BidRelation", fields: [buyer_id], references: [id])
 }
