@@ -53,4 +53,5 @@ model Auction {
   auction_type String
   auction_status String @default("active")
   start_time DateTime @default(now())
+  end_time DateTime
 }
