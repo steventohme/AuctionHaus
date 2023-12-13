@@ -47,5 +47,5 @@ model Auction {
   name String
   image String?
   description String?
-  
+  starting_price Float
 }
