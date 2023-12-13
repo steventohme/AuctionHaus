@@ -61,6 +61,8 @@ model Auction {
   updated_at     DateTime  @updatedAt
   deleted_at     DateTime?
 
+  Bid Bid[]
+
   lister_id Int
   Lister    User @relation(name: "ListRelation", fields: [lister_id], references: [id])
 
@@ -81,5 +83,5 @@ model Bid{
   status String @default("pending")
 
   User User @relation(fields: [bidder_id], references: [id])
-  
+  Auction Auction @relation(fields: [auction_id], references: [id])
 }
