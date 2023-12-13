@@ -50,6 +50,6 @@ model Auction {
   starting_price Float
   current_price Float
   grab_now_price Float?
-  auctionType String
+  auction_type String
   auction_status String @default("active")
 }
