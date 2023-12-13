@@ -70,3 +70,5 @@ model Auction {
   winner_id Int?
   Winner    User? @relation(name: "WinnerRelation", fields: [winner_id], references: [id])
 }
+
+
