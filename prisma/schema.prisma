@@ -12,5 +12,5 @@ model User {
   username      String         @unique
   user_email     String        @unique
   user_password  String // change this to proper authentification
-  buyer_rating   Float         @default(0.0)
+  buyer_rating   Float         @default(0.0) // max of 5
 }
