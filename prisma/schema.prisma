@@ -81,4 +81,5 @@ model Bid{
   status String @default("pending")
 
   User User @relation(fields: [bidder_id], references: [id])
+  
 }
