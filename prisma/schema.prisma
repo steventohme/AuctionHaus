@@ -8,35 +8,35 @@ datasource db {
 }
 
 model User {
-  id             Int           @id @unique @default(autoincrement())
-  username      String         @unique
-  user_email     String        @unique
-  user_password  String // change this to proper authentification
-  buyer_rating   Float         @default(0.0)
-  seller_rating  Float         @default(0.0)
-  seller_reviews Int           @default(0)
-  buyer_reviews  Int           @default(0)
+  id              Int           @id @unique @default(autoincrement())
+  username        String        @unique
+  user_email      String        @unique
+  user_password   String // change this to proper authentification
+  buyer_rating    Float         @default(0.0)
+  seller_rating   Float         @default(0.0)
+  seller_reviews  Int           @default(0)
+  buyer_reviews   Int           @default(0)
   profile_picture String?
-  bio           String?
-  status       String?       @default("offline")
-  Inactive_since DateTime?
-  created_at     DateTime      @default(now())
-  updated_at     DateTime      @updatedAt
-  deleted_at     DateTime?
-  user_address   UserAddress[]
+  bio             String?
+  status          String?       @default("offline")
+  Inactive_since  DateTime?
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+  deleted_at      DateTime?
+  user_address    UserAddress[]
 }
 
 model UserAddress {
-  id           Int           @id @unique @default(autoincrement())
-  user_id      Int
-  address_line1 String
-  address_line2 String?
-  city         String
+  id                Int       @id @unique @default(autoincrement())
+  user_id           Int
+  address_line1     String
+  address_line2     String?
+  city              String
   state_or_province String
-  postal_code  String
-  country      String
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
-  deleted_at   DateTime?
-  User          User   @relation(fields: [user_id], references: [id])
+  postal_code       String
+  country           String
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  deleted_at        DateTime?
+  User              User      @relation(fields: [user_id], references: [id])
 }
