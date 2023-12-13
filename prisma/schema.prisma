@@ -71,4 +71,7 @@ model Auction {
   Winner    User? @relation(name: "WinnerRelation", fields: [winner_id], references: [id])
 }
 
-
+model Bid{
+  id Int @id @unique @default(autoincrement())
+  
+}
