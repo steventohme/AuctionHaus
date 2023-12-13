@@ -58,5 +58,6 @@ model Auction {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
 
+  seller_id Int
   
 }
