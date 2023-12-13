@@ -8,5 +8,5 @@ datasource db {
 }
 
 model User {
-  id             Int           @id @unique
+  id             Int           @id @unique @default(autoincrement())
 }
