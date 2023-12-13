@@ -49,5 +49,5 @@ model Auction {
   description String?
   starting_price Float
   current_price Float
-  
+  grab_now_price Float?
 }
