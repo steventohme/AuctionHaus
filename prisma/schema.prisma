@@ -41,7 +41,7 @@ model UserAddress {
   User              User      @relation(fields: [user_id], references: [id])
 }
 
-// may need 
+// may need t
 model User_payment {
   id            Int       @id @unique @default(autoincrement())
   user_id       Int
