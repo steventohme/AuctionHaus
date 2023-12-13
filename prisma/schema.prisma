@@ -62,7 +62,7 @@ model Auction {
   lister_id Int
   Lister    User @relation(name: "ListRelation", fields: [lister_id], references: [id])
 
-  // convert 
+  // convert this to a list of 
   bidder_id Int?
   Bidder    User? @relation(name: "BidRelation", fields: [bidder_id], references: [id])
 }
