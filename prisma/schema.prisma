@@ -23,4 +23,12 @@ model User {
   created_at     DateTime      @default(now())
   updated_at     DateTime      @updatedAt
   deleted_at     DateTime?
+  user_address   UserAddress[]
+}
+
+model UserAddress {
+  id           Int           @id @unique @default(autoincrement())
+  user_id      Int
+  address_line1 String
+   User          User   @relation(fields: [user_id], references: [id])
 }
