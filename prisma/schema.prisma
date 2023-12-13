@@ -56,5 +56,7 @@ model Auction {
   end_time DateTime?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  deleted_at DateTime?
+
   
 }
