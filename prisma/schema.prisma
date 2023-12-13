@@ -8,20 +8,20 @@ datasource db {
 }
 
 model User {
-  id              Int           @id @unique @default(autoincrement())
-  username        String        @unique
-  user_email      String        @unique
+  id              Int            @id @unique @default(autoincrement())
+  username        String         @unique
+  user_email      String         @unique
   user_password   String // change this to proper authentification
-  buyer_rating    Float         @default(0.0)
-  seller_rating   Float         @default(0.0)
-  seller_reviews  Int           @default(0)
-  buyer_reviews   Int           @default(0)
+  buyer_rating    Float          @default(0.0)
+  seller_rating   Float          @default(0.0)
+  seller_reviews  Int            @default(0)
+  buyer_reviews   Int            @default(0)
   profile_picture String?
   bio             String?
-  status          String?       @default("offline")
+  status          String?        @default("offline")
   Inactive_since  DateTime?
-  created_at      DateTime      @default(now())
-  updated_at      DateTime      @updatedAt
+  created_at      DateTime       @default(now())
+  updated_at      DateTime       @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
   user_payment    User_payment[]
@@ -40,19 +40,21 @@ model UserAddress {
   updated_at        DateTime  @updatedAt
   deleted_at        DateTime?
   User              User      @relation(fields: [user_id], references: [id])
+  User_payment User_payment[]
 }
 
 // may need tweaking once stripe is implemented
 model User_payment {
-  id            Int       @id @unique @default(autoincrement())
-  user_id       Int
-  payment_type  String
-  provider      String
-  account_no    Int
-  expry_date    DateTime
+  id                 Int         @id @unique @default(autoincrement())
+  user_id            Int
+  payment_type       String
+  provider           String
+  account_no         Int
+  expry_date         DateTime
   billing_address_id Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  deleted_at    DateTime?
-  User          User      @relation(fields: [user_id], references: [id])
+  created_at         DateTime    @default(now())
+  updated_at         DateTime    @updatedAt
+  deleted_at         DateTime?
+  User               User        @relation(fields: [user_id], references: [id])
+  UserAddress        UserAddress @relation(fields: [billing_address_id], references: [id])
 }
