@@ -77,5 +77,5 @@ model Bid{
   bidder_id Int
   bid_amount Float
   created_at DateTime @default(now())
-  status String @default("active")
+  status String @default("pendin")
 }
