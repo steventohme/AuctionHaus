@@ -24,6 +24,7 @@ model User {
   updated_at      DateTime       @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
+  Auction         Auction[]
 }
 
 model UserAddress {
@@ -59,5 +60,5 @@ model Auction {
   deleted_at DateTime?
 
   seller_id Int
-  
+  Seller User @relation(fields: [seller_id], references: [id])
 }
