@@ -27,6 +27,7 @@ model User {
   list_auction         Auction[] @relation(name: "ListRelation")
   bid_auction          Auction[] @relation(name: "BidRelation")
   won_auction          Auction[] @relation(name: "WinnerRelation")
+  bid                 Bid[]     
 }
 
 model UserAddress {
@@ -79,5 +80,5 @@ model Bid{
   created_at DateTime @default(now())
   status String @default("pending")
 
-  
+  User User @relation(fields: [bidder_id], references: [id])
 }
