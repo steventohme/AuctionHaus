@@ -24,6 +24,7 @@ model User {
   updated_at      DateTime      @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
+  user_payment    User_payment[]
 }
 
 model UserAddress {
@@ -53,5 +54,5 @@ model User_payment {
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
   deleted_at    DateTime?
-  
+  User          User      @relation(fields: [user_id], references: [id])
 }
