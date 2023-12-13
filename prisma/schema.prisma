@@ -48,5 +48,6 @@ model User_payment {
   payment_type  String
   provider      String
   account_no    Int
+  expry_date    DateTime
   
 }
