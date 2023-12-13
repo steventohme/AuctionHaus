@@ -44,4 +44,5 @@ model UserAddress {
 
 model Auction {
   id Int @id @unique @default(autoincrement())
+  
 }
