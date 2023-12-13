@@ -65,4 +65,7 @@ model Auction {
   // convert this to a list of bidders
   bidder_id Int?
   Bidder    User? @relation(name: "BidRelation", fields: [bidder_id], references: [id])
+
+  winner_id Int?
+  
 }
