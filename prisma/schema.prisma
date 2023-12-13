@@ -24,10 +24,10 @@ model User {
   updated_at      DateTime      @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
-  list_auction         Auction[] @relation(name: "ListRelation")
-  bid_auction          Auction[] @relation(name: "BidRelation")
-  won_auction          Auction[] @relation(name: "WinnerRelation")
-  bid                 Bid[]     
+  list_auction    Auction[]     @relation(name: "ListRelation")
+  bid_auction     Auction[]     @relation(name: "BidRelation")
+  won_auction     Auction[]     @relation(name: "WinnerRelation")
+  bid             Bid[]
 }
 
 model UserAddress {
@@ -74,14 +74,14 @@ model Auction {
   Winner    User? @relation(name: "WinnerRelation", fields: [winner_id], references: [id])
 }
 
-model Bid{
-  id Int @id @unique @default(autoincrement())
+model Bid {
+  id         Int      @id @unique @default(autoincrement())
   auction_id Int
-  bidder_id Int
+  bidder_id  Int
   bid_amount Float
   created_at DateTime @default(now())
-  status String @default("pending")
+  status     String   @default("pending")
 
-  User User @relation(fields: [bidder_id], references: [id])
+  User    User    @relation(fields: [bidder_id], references: [id])
   Auction Auction @relation(fields: [auction_id], references: [id])
 }
