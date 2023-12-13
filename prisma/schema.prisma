@@ -24,11 +24,10 @@ model User {
   updated_at      DateTime      @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
-    bids            Bid[]
+  bids            Bid[]
   list_auction    Auction[]     @relation(name: "ListRelation")
   bid_auction     Auction[]     @relation(name: "BidRelation")
   won_auction     Auction[]     @relation(name: "WinnerRelation")
-
 }
 
 model UserAddress {
