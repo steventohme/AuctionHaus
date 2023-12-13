@@ -73,5 +73,5 @@ model Auction {
 
 model Bid{
   id Int @id @unique @default(autoincrement())
-  
+  auction_id Int
 }
