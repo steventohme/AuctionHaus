@@ -48,4 +48,6 @@ model Auction {
   image String?
   description String?
   starting_price Float
+  current_price Float
+  
 }
