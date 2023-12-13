@@ -33,6 +33,7 @@ model UserAddress {
   address_line2 String?
   city         String
   state_or_province String
-  
+  postal_code  String
+  country      String
   User          User   @relation(fields: [user_id], references: [id])
 }
