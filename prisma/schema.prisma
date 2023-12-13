@@ -31,5 +31,6 @@ model UserAddress {
   user_id      Int
   address_line1 String
   address_line2 String?
+  city         String
   User          User   @relation(fields: [user_id], references: [id])
 }
