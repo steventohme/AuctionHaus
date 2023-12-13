@@ -16,6 +16,7 @@ model User {
   seller_rating  Float         @default(0.0)
   seller_reviews Int           @default(0)
   buyer_reviews  Int           @default(0)
+  
   created_at     DateTime      @default(now())
   updated_at     DateTime      @updatedAt
 }
