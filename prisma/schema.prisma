@@ -14,5 +14,6 @@ model User {
   user_password  String // change this to proper authentification
   buyer_rating   Float         @default(0.0)
   seller_rating  Float         @default(0.0)
+  created_at     DateTime      @default(now())
   
 }
