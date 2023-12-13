@@ -8,23 +8,24 @@ datasource db {
 }
 
 model User {
-  id              Int            @id @unique @default(autoincrement())
-  username        String         @unique
-  user_email      String         @unique
+  id              Int           @id @unique @default(autoincrement())
+  username        String        @unique
+  user_email      String        @unique
   user_password   String // change this to proper authentification
-  buyer_rating    Float          @default(0.0)
-  seller_rating   Float          @default(0.0)
-  seller_reviews  Int            @default(0)
-  buyer_reviews   Int            @default(0)
+  buyer_rating    Float         @default(0.0)
+  seller_rating   Float         @default(0.0)
+  seller_reviews  Int           @default(0)
+  buyer_reviews   Int           @default(0)
   profile_picture String?
   bio             String?
-  status          String?        @default("offline")
+  status          String?       @default("offline")
   Inactive_since  DateTime?
-  created_at      DateTime       @default(now())
-  updated_at      DateTime       @updatedAt
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
   deleted_at      DateTime?
   user_address    UserAddress[]
-  auction         Auction[]
+  list_auction         Auction[] @relation(name: "SellerRelation")
+  bid_auction          Auction[] @relation(name: "BuyerRelation")
 }
 
 model UserAddress {
@@ -40,25 +41,27 @@ model UserAddress {
   updated_at        DateTime  @updatedAt
   deleted_at        DateTime?
   User              User      @relation(fields: [user_id], references: [id])
-  
 }
 
 model Auction {
-  id Int @id @unique @default(autoincrement())
-  name String
-  image String?
-  description String?
+  id             Int       @id @unique @default(autoincrement())
+  name           String
+  image          String?
+  description    String?
   starting_price Float
-  current_price Float
+  current_price  Float
   grab_now_price Float?
-  auction_type String
-  auction_status String @default("active")
-  start_time DateTime @default(now())
-  end_time DateTime?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at DateTime?
+  auction_type   String
+  auction_status String    @default("active")
+  start_time     DateTime  @default(now())
+  end_time       DateTime?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  deleted_at     DateTime?
 
   seller_id Int
-  Seller User @relation(fields: [seller_id], references: [id])
+  Seller    User @relation(name: "SellerRelation", fields: [seller_id], references: [id])
+
+  buyer_id Int?
+  Buyer    User? @relation(name: "BuyerRelation", fields: [buyer_id], references: [id])
 }
