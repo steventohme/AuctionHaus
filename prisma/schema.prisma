@@ -47,5 +47,5 @@ model User_payment {
   user_id       Int
   payment_type  String
   provider      String
-  
+  account_no    String
 }
