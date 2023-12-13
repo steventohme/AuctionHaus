@@ -44,4 +44,7 @@ model UserAddress {
 model User_payment {
   id            Int       @id @unique @default(autoincrement())
   user_id       Int
+  payment_type  String
+  provider      String
+  
 }
