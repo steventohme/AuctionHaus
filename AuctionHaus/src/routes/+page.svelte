@@ -3,4 +3,5 @@
 
 <!-- API CALLS:
  getRecommendedAuctions(userID) - get all auctions that are recommended for the user
+ getAuctionsByCategory(categoryID) - get all auctions that are in the category
  -->
