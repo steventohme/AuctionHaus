@@ -1,4 +1,5 @@
 {
 	"/": [],
-	"/auction/[auctionid]": []
+	"/auction/[auctionid]": [],
+	"/notifications": []
 }
