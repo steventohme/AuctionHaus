@@ -34,22 +34,47 @@ export default function Login({
     const origin = headers().get('origin')
     const email = formData.get('email') as string
     const password = formData.get('password') as string
+    const username = formData.get('username') as string
+    const firstName = formData.get('first_name') as string
+    const lastName = formData.get('last_name') as string
     const cookieStore = cookies()
     const supabase = createClient(cookieStore)
 
-    const { error } = await supabase.auth.signUp({
+    let { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: `${origin}/auth/callback`,
-      },
+      // options: {
+      //   emailRedirectTo: `${origin}/auth/callback`,
+      // },
     })
 
     if (error) {
       return redirect('/login?message=Could not authenticate user')
     }
 
-    return redirect('/login?message=Check email to continue sign in process')
+    if (!data.user) {
+      return redirect('/login?message=Could not authenticate user')
+    }
+
+    const { error: insertError } = await supabase
+      .from('AuctionHausUsers')
+      .insert([
+        { 
+          first_name: firstName, 
+          id: data.user.id,
+          last_name: lastName,
+          username: username
+        },
+      ]).select()
+
+  if (insertError) {
+    console.error('Error inserting user details:', insertError)
+    return redirect('/login?message=Could not store user details')
+  }
+
+  return redirect('/')
+
+    //return redirect('/login?message=Check email to continue sign in process')
   }
 
   return (
@@ -79,6 +104,34 @@ export default function Login({
         className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
         action={signIn}
       >
+        <label className="text-md" htmlFor="first_name">
+          First Name
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="first_name"
+          placeholder="John"
+          required
+        />
+
+        <label className="text-md" htmlFor="last_name">
+          Last Name
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="last_name"
+          placeholder="Doe"
+          required
+        />
+        <label className="text-md" htmlFor="username">
+          Username
+        </label>
+        <input
+          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          name="username"
+          placeholder="JohnDoe69"
+          required
+        />
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -88,6 +141,7 @@ export default function Login({
           placeholder="you@example.com"
           required
         />
+
         <label className="text-md" htmlFor="password">
           Password
         </label>

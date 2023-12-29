@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+
 export default async function AuthButton() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
@@ -10,6 +11,11 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
+
+
+
+  const { data: AuctionHausUsers, error } = await supabase.from('AuctionHausUsers').select().eq('id', user?.id || '')
 
   const signOut = async () => {
     'use server'
@@ -22,7 +28,7 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      Hey, {AuctionHausUsers?.[0]?.username}!
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
           Logout
