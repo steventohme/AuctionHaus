@@ -3,7 +3,7 @@ import { headers, cookies } from 'next/headers'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
-export default function Login({
+export default function SignIn({
   searchParams,
 }: {
   searchParams: { message: string }
@@ -22,60 +22,12 @@ export default function Login({
     })
 
     if (error) {
-      return redirect('/login?message=Could not authenticate user')
+      return redirect('/signin?message=Could not authenticate user')
     }
 
     return redirect('/')
   }
 
-  const signUp = async (formData: FormData) => {
-    'use server'
-
-    const origin = headers().get('origin')
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const username = formData.get('username') as string
-    const firstName = formData.get('first_name') as string
-    const lastName = formData.get('last_name') as string
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
-
-    let { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      // options: {
-      //   emailRedirectTo: `${origin}/auth/callback`,
-      // },
-    })
-
-    if (error) {
-      return redirect('/login?message=Could not authenticate user')
-    }
-
-    if (!data.user) {
-      return redirect('/login?message=Could not authenticate user')
-    }
-
-    const { error: insertError } = await supabase
-      .from('AuctionHausUsers')
-      .insert([
-        { 
-          first_name: firstName, 
-          id: data.user.id,
-          last_name: lastName,
-          username: username
-        },
-      ]).select()
-
-  if (insertError) {
-    console.error('Error inserting user details:', insertError)
-    return redirect('/login?message=Could not store user details')
-  }
-
-  return redirect('/')
-
-    //return redirect('/login?message=Check email to continue sign in process')
-  }
 
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
@@ -104,34 +56,6 @@ export default function Login({
         className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
         action={signIn}
       >
-        <label className="text-md" htmlFor="first_name">
-          First Name
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="first_name"
-          placeholder="John"
-          required
-        />
-
-        <label className="text-md" htmlFor="last_name">
-          Last Name
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="last_name"
-          placeholder="Doe"
-          required
-        />
-        <label className="text-md" htmlFor="username">
-          Username
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="username"
-          placeholder="JohnDoe69"
-          required
-        />
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -154,12 +78,6 @@ export default function Login({
         />
         <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
           Sign In
-        </button>
-        <button
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-        >
-          Sign Up
         </button>
         {searchParams?.message && (
           <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">

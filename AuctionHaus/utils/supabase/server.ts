@@ -33,3 +33,17 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
     }
   )
 }
+
+export async function getSession() {
+
+  const supabase = createClient(cookies());
+  try {
+    const {
+      data: { session }
+    } = await supabase.auth.getSession();
+    return session;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
